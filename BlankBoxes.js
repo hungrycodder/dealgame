@@ -11,5 +11,6 @@ export const BlankBoxes = ({ boxes, onOpenBox }) => {
       onClick={() => onOpenBox(box.amount)}> {box.selected ? "$" + box.amount : (index + 1)}</button>
   ));
 
+
   return closedBoxes;
 }

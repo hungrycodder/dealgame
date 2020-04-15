@@ -1,0 +1,25 @@
+h1, p {
+  font-family: Lato;
+}
+
+button {
+  text-align: left;
+  min-width: 130px;
+  background-color: yellow;
+  color: black;
+}
+
+button:disabled {
+  background-color: grey;
+  color: white;
+  opacity: 0.7;
+}
+
+button:before {
+  content: "$"
+}
+
+.blank-box:before {
+  content: none
+}
+

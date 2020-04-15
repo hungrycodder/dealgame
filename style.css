@@ -19,7 +19,12 @@ button:before {
   content: "$"
 }
 
+.blank-box {
+  background-image: url("assets/images/case.png");
+  background-color: #cccccc;
+}
+
 .blank-box:before {
-  content: none
+  content: none;
 }
 

@@ -19,21 +19,46 @@ class App extends Component {
   }
 
   onOpenBox = (amount) => {
+
+
+
     const getUpdatedBoxes = (b_amount, boxCollection) => {
-      return boxCollection.map(b=> {
+      return boxCollection.map(b => {
         if (b.amount === b_amount)
           b.selected = true;
         return b;
       });
     };
 
-    this.setState({boxes: getUpdatedBoxes(amount, this.state.boxes)});
+    this.setState({ boxes: getUpdatedBoxes(amount, this.state.boxes) });
 
-    let silverBox = this.state.silverBoxes.find(b=>b.amount === amount);
+    let silverBox = this.state.silverBoxes.find(b => b.amount === amount);
     if (silverBox) {
-      this.setState({silverBoxes: getUpdatedBoxes(amount, this.state.silverBoxes)});
+      this.setState({ silverBoxes: getUpdatedBoxes(amount, this.state.silverBoxes) });
     } else {
-      this.setState({goldBoxes: getUpdatedBoxes(amount, this.state.goldBoxes)});
+      this.setState({ goldBoxes: getUpdatedBoxes(amount, this.state.goldBoxes) });
+    }
+    this.endOfGameCheck();
+  }
+
+  endOfGameCheck() {
+    setTimeout(() => {
+      const openBoxes = this.state.boxes.filter(b => b.selected);
+      if (openBoxes && openBoxes.length === this.state.boxes.length - 1) {
+        const lastBox = this.state.boxes.find(b=>!b.selected);
+        alert(`The game is finished and you won $${lastBox.amount}`);
+        return;
+      }
+
+      this.makeAnOffer();
+    }, 0);
+  }
+
+
+  makeAnOffer() {
+    const openBoxes = this.state.boxes.filter(b => b.selected);
+    if (openBoxes && openBoxes.length % 6 === 0) {
+      alert("Would you like to accept an offer of $3000?");
     }
   }
 
@@ -41,21 +66,21 @@ class App extends Component {
     return (
       <div>
         <table>
-        <tbody>
-          <tr>
-            <td>
-              <BoxList boxes={this.state.silverBoxes}></BoxList>
-            </td>
-            <td>
-              <BlankBoxes boxes={this.state.boxes} onOpenBox={this.onOpenBox}></BlankBoxes>
-            </td>
-            <td>
-              <BoxList boxes={this.state.goldBoxes}></BoxList>
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>
+                <BoxList boxes={this.state.silverBoxes}></BoxList>
+              </td>
+              <td>
+                <BlankBoxes boxes={this.state.boxes} onOpenBox={this.onOpenBox}></BlankBoxes>
+              </td>
+              <td>
+                <BoxList boxes={this.state.goldBoxes}></BoxList>
+              </td>
+            </tr>
           </tbody>
         </table>
-        
+
       </div>
     );
   }

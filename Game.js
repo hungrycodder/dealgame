@@ -6,9 +6,15 @@ import { BlankBoxes } from './BlankBoxes';
 
 export const Game = ({ boxCollection }) => {
   const [boxes, setBoxes] = useState(shuffle(boxCollection));
-  const [silverBoxes, setSilverBoxes] = useState(boxCollection.filter(b => b.boxType === 1));
-  const [goldBoxes, setGoldBoxes] = useState(boxCollection.filter(b => b.boxType === 2));
+  
+  const _silverBoxes = boxCollection.filter(b => b.boxType === 1);
+  const [silverBoxes, setSilverBoxes] = useState(_silverBoxes);
+
+  const _goldBoxes = boxCollection.filter(b => b.boxType === 2);
+  const [goldBoxes, setGoldBoxes] = useState(_goldBoxes);
+
   const [offerPercentage, setOfferPercentage] = useState([0.15, 0.25, 0.65, .75]);
+  
   const markBoxAsOpened = (b_amount, boxCollection) => {
     return boxCollection.map(b => {
       if (b.amount === b_amount)

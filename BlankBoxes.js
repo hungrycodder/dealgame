@@ -8,7 +8,7 @@ export const BlankBoxes = ({ boxes, onOpenBox }) => {
 
   let closedBoxes = boxes.map((box, index) => (
     <button key={index} className="blank-box" disabled={box.selected}
-      onClick={() => onOpenBox(box.amount)}> {box.selected ? "$" + box.amount : (index + 1)}</button>
+      onClick={() => onOpenBox(box)}> {box.selected ? "$" + box.amount : (index + 1)}</button>
   ));
 
 
